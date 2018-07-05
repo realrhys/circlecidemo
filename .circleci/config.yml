@@ -47,9 +47,7 @@ jobs:
           echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
           sudo apt-get update
           sudo apt-get install -y kubectl
-      - run: kops export
-      - run: echo "TAG!!!!!!!!!!!!!!" 
-      - run: echo $TAG
+      - run: kops export kubecfg
       - run: |
           TAG=v0.0.$CIRCLE_PREVIOUS_BUILD_NUM
           sed 's/BUILD_VERSION/'$TAG'/' kube/dev.yml.template > kube/dev.yml
