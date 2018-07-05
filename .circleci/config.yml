@@ -18,3 +18,8 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn test
       - run: echo "$CIRCLE_BUILD_NUM again"
+  dockerize:
+    machine: true
+    steps:
+      - checkout
+      - run: echo $DOCKER_USER
