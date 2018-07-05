@@ -43,6 +43,6 @@ workflows:
       - dockerize:
           requires:
             - build
-      - dockerize:
+      - deploy:
           requires:
             - dockerize
