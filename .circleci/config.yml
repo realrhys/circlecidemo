@@ -49,12 +49,17 @@ jobs:
           sudo apt-get install -y kubectl
       - run: kops export kubecfg
       - run: |
-          export BV=23
-          sed 's/BUILD_VERSION/'$BV'/' dev.yml.template > dev.yml
-          kubectl apply -f 
-      - run: kubectl get po --all-namespaces
+          TAG=v0.0.$CIRCLE_BUILD_NUM
+          sed 's/BUILD_VERSION/'$TAG'/' kube/dev.yml.template > kube/dev.yml
+          kubectl apply -f kube/dev.yml
 workflows:
   version: 2
   build_and_dockerize:
     jobs:
-      - deploy
+      - build
+      - dockerize:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - dockerize

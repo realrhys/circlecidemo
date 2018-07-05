@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: circlecidemo-service
-        image: volentixlabs/circlecidemo:0.0.BUILD_VERSION
+        image: volentixlabs/circlecidemo:BUILD_VERSION
         ports:
         - containerPort: 3000
 ---
