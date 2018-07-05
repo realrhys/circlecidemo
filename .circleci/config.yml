@@ -28,4 +28,6 @@ workflows:
   build_and_dockerize:
     jobs:
       - build
-      - dockerize
+      - dockerize:
+          requires:
+            - build
