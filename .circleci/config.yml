@@ -47,8 +47,8 @@ jobs:
           echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
           sudo apt-get update
           sudo apt-get install -y kubectl
-      - run: kops export kubecfg clusters.vlabs.ninja
-      - run: kubectl version
+      - run: kops export kubecfg
+      - run: kubectl get po --all-namespaces
 workflows:
   version: 2
   build_and_dockerize:
