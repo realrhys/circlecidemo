@@ -39,4 +39,11 @@ workflows:
   version: 2
   build_and_dockerize:
     jobs:
-      - deploy
+      - build
+      - dockerize:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - dockerize
+            
