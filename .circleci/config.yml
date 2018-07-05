@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          TAG=0.0.$CIRCLE_BUILD_NUM
+          TAG=v0.0.$CIRCLE_BUILD_NUM
           docker build -t volentixlabs/circlecidemo:$TAG .
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker push volentixlabs/circlecidemo:$TAG
@@ -48,6 +48,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y kubectl
       - run: kops export kubecfg
+      - run: |
+          export BV=23
+          sed 's/BUILD_VERSION/'$BV'/' dev.yml.template > dev.yml
+          kubectl apply -f 
       - run: kubectl get po --all-namespaces
 workflows:
   version: 2
