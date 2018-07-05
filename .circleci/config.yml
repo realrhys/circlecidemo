@@ -23,3 +23,9 @@ jobs:
     steps:
       - checkout
       - run: echo $DOCKER_USER
+workflows:
+  version: 2
+  build_and_dockerize:
+    jobs:
+      - build
+      - dockerize
